@@ -1,0 +1,8 @@
+Flask==3.0.0
+Pydantic==2.4.0
+pypdf==3.17.1
+reportlab==4.0.7
+boto3==1.28.0
+python-dotenv==1.0.0
+gunicorn==21.2.0
+Werkzeug==3.0.0
