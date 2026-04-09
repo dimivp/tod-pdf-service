@@ -1,0 +1,32 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Virtual environments
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+
+# Generated files
+*.pdf
+*.log
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# MinIO local data
+minio-data/
