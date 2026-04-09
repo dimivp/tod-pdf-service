@@ -18,31 +18,44 @@ import config
 logger = logging.getLogger(__name__)
 
 
-# Coordinate mappings for template fields (in mm from bottom-left)
-# These need to be calibrated based on the actual TOD.pdf template
+# Coordinate mappings for A4 template fields (in mm from bottom-left)
+# A4 page: 210 x 297 mm
+# Calibrated from actual TOD.pdf template screenshot
 FIELD_POSITIONS = {
-    "employeeName": (20, 270),
-    "date": (20, 265),
-    "time": (120, 265),
-    "location": (20, 260),
-    "trackNumber": (120, 260),
-    "firstVehicleNumber": (20, 255),
-    "lastVehicleNumber": (120, 255),
-    "isOnAir": (20, 250),
+    # Top section - Medewerker/Collaborateur row (below header)
+    "employeeName": (18, 260),
 
-    # Immobilization table starts at:
-    "table_x": 20,
-    "table_y": 180,
+    # Top section - Datum/Date and Tijd/Heure
+    "date": (100, 260),
+    "time": (175, 260),
+
+    # Second row - Locatie/Lieu and Spoor/Voie
+    "location": (18, 250),
+    "trackNumber": (100, 250),
+
+    # Train composition - Voertuignummers/Numéros de véhicule
+    "firstVehicleNumber": (20, 235),
+    "lastVehicleNumber": (165, 235),
+
+    # On-air checkbox
+    "isOnAir": (18, 215),
+
+    # Immobilization table (left panel) - max 12 rows
+    "table_x": 18,
+    "table_y": 210,
     "table_row_height": 6,
 
-    # Radio buttons (Eindseinen)
-    "endSignal_lamps": (150, 160),
-    "endSignal_plaques": (170, 160),
+    # Radio buttons - Eindseinen/Signaux (right panel)
+    "endSignal_lamps": (145, 205),
+    "endSignal_plaques": (145, 195),
 
-    # Radio buttons (Remregime)
-    "brakeRegime_p": (150, 150),
-    "brakeRegime_ll": (170, 150),
-    "brakeRegime_g": (190, 150),
+    # Radio buttons - Remregime/Régime (right panel)
+    "brakeRegime_p": (145, 185),
+    "brakeRegime_ll": (145, 175),
+    "brakeRegime_g": (145, 165),
+
+    # Full brake test checkbox (right panel)
+    "fullBrakeTest": (145, 140)
 }
 
 
@@ -102,6 +115,23 @@ def create_overlay(request: TODRequest) -> bytes:
     try:
         # Set font
         c.setFont(config.PDF_FONT_FAMILY, config.PDF_FONT_SIZE_NORMAL)
+
+        # DEBUG: Draw position markers (red circles)
+        c.setStrokeColor(colors.red)
+        c.setLineWidth(0.5)
+        for label, pos in [
+            ("NAME", FIELD_POSITIONS["employeeName"]),
+            ("DATE", FIELD_POSITIONS["date"]),
+            ("TIME", FIELD_POSITIONS["time"]),
+            ("LOC", FIELD_POSITIONS["location"]),
+            ("TRACK", FIELD_POSITIONS["trackNumber"]),
+            ("VEH1", FIELD_POSITIONS["firstVehicleNumber"]),
+            ("VEH2", FIELD_POSITIONS["lastVehicleNumber"]),
+        ]:
+            x, y = pos[0] * mm, pos[1] * mm
+            c.circle(x, y, 3 * mm, fill=0)
+            c.setFont("Helvetica", 6)
+            c.drawString(x + 4 * mm, y, label)
 
         # Draw basic info fields
         _draw_text_field(c, request.employeeName, FIELD_POSITIONS["employeeName"])
