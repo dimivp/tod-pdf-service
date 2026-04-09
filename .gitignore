@@ -21,6 +21,7 @@ env/
 
 # Generated files
 *.pdf
+!templates/TOD.pdf
 *.log
 .pytest_cache/
 
