@@ -1,0 +1,51 @@
+{
+  "employeeName": "Jan Pieterzoon",
+  "date": "2026-04-09",
+  "time": "14:30",
+  "location": "Antwerpen",
+  "trackNumber": "T001",
+  "firstVehicleNumber": "1 234-5",
+  "lastVehicleNumber": "9 876-5",
+  "isOnAir": false,
+  "tripId": "TRIP-12345",
+  "immobilizationRows": [
+    {
+      "position": 1,
+      "vehicleNumber": "1 234-5",
+      "handremCount": 2,
+      "woodenBlockCount": 4,
+      "metalBlockCount": 0
+    },
+    {
+      "position": 2,
+      "vehicleNumber": "2 345-6",
+      "handremCount": 1,
+      "woodenBlockCount": 2,
+      "metalBlockCount": 0
+    },
+    {
+      "position": 3,
+      "vehicleNumber": "3 456-7",
+      "handremCount": 3,
+      "woodenBlockCount": 6,
+      "metalBlockCount": 0
+    },
+    {
+      "position": 4,
+      "vehicleNumber": "4 567-8",
+      "handremCount": 2,
+      "woodenBlockCount": 4,
+      "metalBlockCount": 0
+    },
+    {
+      "position": 5,
+      "vehicleNumber": "5 678-9",
+      "handremCount": 1,
+      "woodenBlockCount": 2,
+      "metalBlockCount": 0
+    }
+  ],
+  "endSignal": "lamps",
+  "brakeRegime": "P",
+  "fullBrakeTest": true
+}
