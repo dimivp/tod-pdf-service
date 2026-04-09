@@ -2,19 +2,27 @@
 
 import logging
 import os
-from flask import Flask, request, send_file, jsonify
-from werkzeug.exceptions import BadRequest
-from pydantic import ValidationError
+import sys
 
-from validators import TODRequest
-from pdf_generator import generate_pdf, generate_pdf_filename
-import config
-from utils import (
-    get_minio_client,
-    generate_request_id,
-    log_request,
-    log_error,
-)
+try:
+    from flask import Flask, request, send_file, jsonify
+    from werkzeug.exceptions import BadRequest
+    from pydantic import ValidationError
+
+    from validators import TODRequest
+    from pdf_generator import generate_pdf, generate_pdf_filename
+    import config
+    from utils import (
+        get_minio_client,
+        generate_request_id,
+        log_request,
+        log_error,
+    )
+except Exception as e:
+    print(f"FATAL ERROR during imports: {e}", file=sys.stderr)
+    import traceback
+    traceback.print_exc()
+    sys.exit(1)
 
 # Configure logging
 logging.basicConfig(
